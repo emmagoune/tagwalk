@@ -23,4 +23,17 @@ J'ai décidé de faire une matrix de convolution d'amélioration de netteté. Mo
 
 Vous pouvez changer les matrices dans le main.
 
+
+J'ai aussi implémenté une fonction max_pooling 2*2 telle que: 
+
+----------------- Image -----------------
+1.000000 2.000000 3.000000 4.000000
+5.000000 6.000000 7.000000 8.000000
+9.000000 10.000000 11.000000 12.000000
+13.000000 14.000000 15.000000 16.000000
+----------------- Max Pooling -----------------
+6.000000 8.000000
+14.000000 16.000000
+
+
 Emma Gouné
