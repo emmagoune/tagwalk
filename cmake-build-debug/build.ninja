@@ -61,6 +61,12 @@ build CMakeFiles/tagwalk1.dir/convolution.c.obj: C_COMPILER__tagwalk1_Debug C$:/
   OBJECT_DIR = CMakeFiles\tagwalk1.dir
   OBJECT_FILE_DIR = CMakeFiles\tagwalk1.dir
 
+build CMakeFiles/tagwalk1.dir/sobel.c.obj: C_COMPILER__tagwalk1_Debug C$:/Users/milky/CLionProjects/tagwalk1/sobel.c || cmake_object_order_depends_target_tagwalk1
+  DEP_FILE = CMakeFiles\tagwalk1.dir\sobel.c.obj.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu99
+  OBJECT_DIR = CMakeFiles\tagwalk1.dir
+  OBJECT_FILE_DIR = CMakeFiles\tagwalk1.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target tagwalk1
@@ -69,7 +75,7 @@ build CMakeFiles/tagwalk1.dir/convolution.c.obj: C_COMPILER__tagwalk1_Debug C$:/
 #############################################
 # Link the executable tagwalk1.exe
 
-build tagwalk1.exe: C_EXECUTABLE_LINKER__tagwalk1_Debug CMakeFiles/tagwalk1.dir/main.c.obj CMakeFiles/tagwalk1.dir/convolution.c.obj
+build tagwalk1.exe: C_EXECUTABLE_LINKER__tagwalk1_Debug CMakeFiles/tagwalk1.dir/main.c.obj CMakeFiles/tagwalk1.dir/convolution.c.obj CMakeFiles/tagwalk1.dir/sobel.c.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\tagwalk1.dir
