@@ -1,8 +1,13 @@
 //
-// Created by milky on 04/06/2023.
+// Created by Emma Gouné on 04/06/2023.
+// This is the filter methods with:
+// 2d convolution, max pooling and sobel filters
 //
 #include "headerfile.h"
+#include <math.h>
+#include <string.h>
 
+// ---------------------- Display the array ----------------------
 
 void dispIm( int row, int col, float (*array)[col])
 {
@@ -17,6 +22,7 @@ void dispIm( int row, int col, float (*array)[col])
     }
 }
 
+// ---------------------- 2D convolution ----------------------
 
 void convolution( int kernel_col, float (*kernel)[kernel_col], int im_row, int im_col, float (*im)[im_col])
 {
@@ -68,6 +74,7 @@ void convolution( int kernel_col, float (*kernel)[kernel_col], int im_row, int i
 
 }
 
+// ---------------------- Max Pooling ----------------------
 
 void max_pooling( int pool_col, float (*pool_mat)[pool_col], int im_row, int im_col, float (*im)[im_col]){
     int row, col;
@@ -142,4 +149,64 @@ float max_mat(int row, int col, float (*mat)[col]) {
         }
     }
     return max;
+}
+
+// ---------------------- SOBEL EDGE DETECTOR ----------------------
+
+
+int conv_sum(pgm* image, int kernel[3][3], int row, int col) {
+    int i, j, sum = 0;
+    for (i = 0; i < 3; i++) {
+        for (j = 0; j < 3; j++) {
+            sum += image->imageData[i + row][j + col] * kernel[i][j];
+        }
+    }
+    return sum;
+}
+
+void sobel_edge_detector(pgm* image, pgm* out_image) {
+    int i, j, gx, gy;
+    int mx[3][3] = {
+            {-1, 0, 1},
+            {-2, 0, 2},
+            {-1, 0, 1}
+    };
+    int my[3][3] = {
+            {-1, -2, -1},
+            {0, 0, 0},
+            {1, 2, 1}
+    };
+
+    for (i = 1; i < image->height - 2; i++) {
+        for (j = 1; j < image->width - 2; j++) {
+            gx = conv_sum(image, mx, i, j);
+            gy = conv_sum(image, my, i, j);
+            out_image->imageData[i][j] = sqrt(gx*gx + gy*gy);
+            out_image->gx[i][j] = gx;
+            out_image->gy[i][j] = gy;
+        }
+    }
+
+}
+
+void normalization(pgm* image, int** matrix) {
+    int min = 1000000, max = 0, i, j;
+
+    for(i = 0; i < image->height; i++) {
+        for(j = 0; j < image->width; j++) {
+            if (matrix[i][j] < min) {
+                min = matrix[i][j];
+            }
+            else if (matrix[i][j] > max) {
+                max = matrix[i][j];
+            }
+        }
+    }
+
+    for(i = 0; i < image->height; i++) {
+        for(j = 0; j < image->width; j++) {
+            double ratio = (double) (matrix[i][j] - min) / (max - min);
+            matrix[i][j] = ratio * 255;
+        }
+    }
 }
